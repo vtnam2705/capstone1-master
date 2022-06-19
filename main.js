@@ -131,6 +131,7 @@ function addItem(e) {
     // Function
     cartList.push(inputCart);
     localStorage.setItem("Cart product", JSON.stringify(cartList))
+
     renderListCarts(cartList);
     cartTotal() ;
     loop();
@@ -141,9 +142,16 @@ function addItem(e) {
 
 //-----------------------------------------------------------
 function renderListCarts(data) {
+    let getLocalStorageData = localStorage.getItem("Cart product");
+
+    if(getLocalStorageData == null) {
+        cartList = []
+    } else {
+        cartList = JSON.parse(getLocalStorageData);
+    }
     var contentHTML = "";
 
-    data.forEach(function (product) {
+    cartList.forEach(function (product) {
         contentHTML += `
                         <div class="cart-item">
                             <div class="cart-img">
@@ -234,7 +242,7 @@ function removeItem(x) {
     cartList = JSON.parse(getLocalStorageData);
     cartList.splice(x, 1);
     localStorage.setItem("Cart product", JSON.stringify(cartList));
-    
+
     let item = x.parentElement;
     item.remove();
     cartTotal()
