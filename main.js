@@ -25,7 +25,7 @@ function getListProducts() {
         .then(function (result) {
             renderListProducts(result.data);
             productList = result.data;
-            cartList = result.data;
+            // cartList = result.data;
         })
         .catch(function (error) {
             console.log(error);
@@ -72,7 +72,7 @@ function renderListProducts(data) {
                             <em class="stocks">In Stock</em>
                         </div>
                         <div class="img-container">
-                            <img class="product-img" src="./image/${product.img}" alt="">
+                            <img class="product-img" src="${product.img}" alt="">
                         </div>
                         <div class="details">
                             <div class="name-fav">
@@ -108,8 +108,6 @@ function renderListProducts(data) {
 function addItem(e) {
     let t = e.parentElement.parentElement.parentElement.parentElement.parentElement;
 
-     //if (t.getElementsByClassName("out-of-stock-cover")[0].style.display == "flex") return;
-
     let productName = t.getElementsByClassName("product-name")[0].innerText;
 
 	let	productPrice = parseFloat(t.getElementsByClassName("product-price")[0].innerText.replace("$ ", ""));
@@ -126,13 +124,14 @@ function addItem(e) {
     // Function
     cartList.push(inputCart);
     renderListCarts(cartList);
-    cartTotal() 
+    cartTotal() ;
+    loop();
+
 }
 //-----------------------------------------------------------
 // Add item into cart
 
 //-----------------------------------------------------------
-
 function renderListCarts(data) {
     var contentHTML = "";
 
@@ -140,7 +139,7 @@ function renderListCarts(data) {
         contentHTML += `
                         <div class="cart-item">
                             <div class="cart-img">
-                                <img src="./image/${product.img}"
+                                <img src="${product.img}"
                                     alt="">
                             </div>
                             <strong class="name">${product.name}</strong>
@@ -161,12 +160,28 @@ function renderListCarts(data) {
                                 </span>
                                 $
                             </p>
-                            <button onclick="removeItem(this)"><i class="fas fa-trash"></i></button>
+                            <button onclick="removeItem(this)" class="btn-dlt"><i class="fas fa-trash"></i></button>
                         </div>
         `
     });
 
     getEle("cartItems").innerHTML = contentHTML;
+}
+// onclick="removeItem(this)
+
+// ----------------------------------
+function loop() {
+    let loopName = document.getElementsByClassName("product-name").innerText;
+
+    let cartItem = document.querySelectorAll(".cart-items .cart-item");
+
+    for(let i = 0; i < cartItem.length; i++) {
+        let pName = document.querySelectorAll(".name");
+        if(pName[i].innerHTML == loopName) {
+            alert("Sản phẩm của bạn đã có trong giỏ hàng")
+            return
+        }
+    }
 }
 
 
@@ -179,20 +194,17 @@ function removeItem() {
 
 // -------------------------------------------------------------------
 // Total price
-
 function cartTotal() {
     let cartItem = document.querySelectorAll(".cart-items .cart-item");
+
     let totalProduct = 0;
 
     for (let i = 0; i < cartItem.length; i++) {
         let inputValue = cartItem[i].querySelector(".qty").innerText;
 
         let productPrice = cartItem[i].querySelector(".price span").innerText;
-        console.log(productPrice);
 
         let total = inputValue * productPrice;
-
-        console.log(total);
 
         totalProduct += total;
     }
@@ -200,3 +212,32 @@ function cartTotal() {
     let displayPrice = document.querySelector(".total");
     displayPrice.innerHTML = totalProduct;
 }
+
+// --------------------------------------------------------------------
+// Delete cart
+function removeItem(x) {
+    // let cartItem = document.querySelectorAll(".cart-items .cart-item");
+
+    // for(let i = 0; i < cartItem.length; i++) {
+    //     let deleteBtn = document.querySelectorAll(".btn-dlt")
+    //     deleteBtn[i].addEventListener("click", function(event) {
+    //         let cartDelete = event.target;
+    //         let cartDeleted = cartDelete.parentElement.parentElement;
+    //         cartDeleted.remove();
+    //         cartTotal();
+    //     })
+    // }
+
+    let item = x.parentElement;
+    item.remove();
+    cartTotal()
+}
+
+
+// --------------------------------------------------------------------
+// Delete all
+// function deleteAll() {
+//     let cartAllItem = document.querySelectorAll(".cart-items");
+//     console.log(cartAllItem);
+//     cartAllItem.remove();
+// }
