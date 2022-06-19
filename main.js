@@ -123,8 +123,10 @@ function addItem(e) {
         qty: 1
     };
 
+    // Function
     cartList.push(inputCart);
     renderListCarts(cartList);
+    cartTotal() 
 }
 //-----------------------------------------------------------
 // Add item into cart
@@ -153,7 +155,12 @@ function renderListCarts(data) {
                                     </button>
                                 </div>
                             </span>
-                            <p class="price">${product.price}$</p>
+                            <p class="price">
+                                <span>
+                                    ${product.price}
+                                </span>
+                                $
+                            </p>
                             <button onclick="removeItem(this)"><i class="fas fa-trash"></i></button>
                         </div>
         `
@@ -169,3 +176,27 @@ function removeItem() {
 
 }
 
+
+// -------------------------------------------------------------------
+// Total price
+
+function cartTotal() {
+    let cartItem = document.querySelectorAll(".cart-items .cart-item");
+    let totalProduct = 0;
+
+    for (let i = 0; i < cartItem.length; i++) {
+        let inputValue = cartItem[i].querySelector(".qty").innerText;
+
+        let productPrice = cartItem[i].querySelector(".price span").innerText;
+        console.log(productPrice);
+
+        let total = inputValue * productPrice;
+
+        console.log(total);
+
+        totalProduct += total;
+    }
+
+    let displayPrice = document.querySelector(".total");
+    displayPrice.innerHTML = totalProduct;
+}
