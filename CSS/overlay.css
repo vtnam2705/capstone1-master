@@ -1,0 +1,123 @@
+.nav button {
+    border: none;
+    background: none;
+    outline: none;
+    color: white;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.nav i{
+    font-size: 25px;
+}
+
+.nav .total-qty {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 10px;
+    right: 20px;
+}
+
+
+
+/* Cart */
+#cart-list{
+    display: none;
+    transition: all .4s ease-in-out;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #000000;
+    backdrop-filter: blur(5px);
+    /* -webkit-filter: blur(8px); */
+    opacity: .5;
+    transition: all .5s ease-in-out;
+    /* display: none; */
+}
+
+.cart-product{
+    display: block;
+    position: absolute;
+    right: 0;
+    width: 70vw;
+    height: 100vh;
+    background-color: #030203;
+    transition: all .6s ease-in-out;
+}
+
+.cart-product button i {
+    position: absolute;
+    top: 17px;
+    right: 32px;
+    color: white; 
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.cart-product .cart-items{
+    position: absolute;
+    width: 90%;
+    margin: 0 5%;
+    height: 50%;
+    top: 10%;
+    flex-direction: column;
+}
+
+.cart-product .cart-items .empty-cart{
+    margin: auto 0;
+    font-size: 40px;
+    font-weight: 600;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.25);
+}
+
+
+.cart-product .final{
+    position: absolute;
+    align-self: flex-end;
+    flex-direction: column;
+    bottom: 10%;
+    right: 0;
+}
+
+
+.cart-product .final strong{
+    align-self: flex-end;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-right: 20px;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.cart-product .final .action {
+    justify-content: space-evenly;
+}
+
+.cart-product .final .action .btn{
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+    border: 1px solid white;
+    margin-right: 20px;
+    border-radius: 10px;
+    color: white;
+    transition: all 0.9s;
+}
+
+.cart-product .final .action .btn:hover{
+    color: black;
+    box-shadow: inset 20em 0 0 0 white;
+}
+
+
+.cart-product .final .action .btn i{
+    position: relative;
+    top: 4px;
+    right: 0;
+}
